@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTapi", "YouTube_kv\RESTapi.csproj", "{393EFA11-6B67-404D-B0EF-0753C2DE5433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testYT", "testYT\testYT.csproj", "{96084105-EC02-4B2B-92C5-255C75F71696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393EFA11-6B67-404D-B0EF-0753C2DE5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{393EFA11-6B67-404D-B0EF-0753C2DE5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{393EFA11-6B67-404D-B0EF-0753C2DE5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{393EFA11-6B67-404D-B0EF-0753C2DE5433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96084105-EC02-4B2B-92C5-255C75F71696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96084105-EC02-4B2B-92C5-255C75F71696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96084105-EC02-4B2B-92C5-255C75F71696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96084105-EC02-4B2B-92C5-255C75F71696}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
