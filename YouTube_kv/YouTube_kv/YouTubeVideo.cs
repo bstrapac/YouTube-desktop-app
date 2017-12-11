@@ -12,7 +12,5 @@ namespace YouTube_kv
         public string sRegionCode { get; set; }
         public string sVideoID { get; set; }
         public string sChannelTitle{ get; set; }  
-
-
     }
 }

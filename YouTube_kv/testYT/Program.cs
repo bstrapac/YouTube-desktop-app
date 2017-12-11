@@ -12,8 +12,13 @@ namespace testYT
     {
         static void Main(string[] args)
         {
-            REST Video = new REST();
-            Video.GetVideos();
+            REST Video = new REST();            
+            List<YouTubeVideo> videi = Video.GetVideos();
+            for (int i = 0; i < videi.Count; i++)
+            {
+                Console.WriteLine(videi[i].sVideoTitle + "/n " + videi[i].sChannelTitle);
+                Console.WriteLine("-----------------------------------");
+            }
             Console.ReadLine();
 
 
