@@ -43,16 +43,16 @@ namespace YouTube_kv
         public List<YouTubeVideo> GetVideos()
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=kali&regionCode=HR&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
+            string url = " ";
             string sJson = CallRestMethod(url);
-            JArray oJson = JArray.Parse(sJson);
+            JObject oJson = JObject.Parse(sJson);
             //čitanje vrijednosti iz Json-a
-            foreach (JObject item in oJson)
+            foreach (JObject item in oJson.SelectToken("regionCode"))
             {
-                string Video_title = (string)item.GetValue("title");
-                string Region_code = (string)item.GetValue("regionCode");
-                string Video_id = (string)item.GetValue("videoID");
-                string Channel_title = (string)item.GetValue("channelTitle");
+                string Video_title = (string)item.SelectToken("title");
+                string Region_code = (string)item.SelectToken("regionCode");
+                string Video_id = (string)item.SelectToken("videoID");
+                string Channel_title = (string)item.SelectToken("channelTitle");
                 //dodavanje objekata u listu
                 lYTVideos.Add(new YouTubeVideo
                 {
@@ -62,7 +62,8 @@ namespace YouTube_kv
                     sChannelTitle = Channel_title,
                 });
             }
-            return lYTVideos;            
+            return lYTVideos;
+            
         }
     }
 }

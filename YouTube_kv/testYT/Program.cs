@@ -12,12 +12,11 @@ namespace testYT
     {
         static void Main(string[] args)
         {
-            REST Video = new REST();            
-            List<YouTubeVideo> videi = Video.GetVideos();
-            for (int i = 0; i < videi.Count; i++)
+            REST Video = new REST();
+            List < YouTubeVideo> list = Video.GetVideos();
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine(videi[i].sVideoTitle + "/n " + videi[i].sChannelTitle);
-                Console.WriteLine("-----------------------------------");
+                Console.WriteLine(list[i].sVideoTitle + ' ' + list[i].sVideoID);
             }
             Console.ReadLine();
 
