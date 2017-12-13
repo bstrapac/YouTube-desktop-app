@@ -14,7 +14,7 @@ namespace testYT
         {
             REST Video = new REST();
             List < YouTubeVideo> list = Video.GetVideos();
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count(); i++)
             {
                 Console.WriteLine(list[i].sVideoTitle + ' ' + list[i].sVideoID);
             }

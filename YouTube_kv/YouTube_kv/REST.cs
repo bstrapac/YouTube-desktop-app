@@ -14,6 +14,8 @@ using Google.Apis.Upload;
 using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 
 /*3.Kreirati projekt RESTapi tipa ClassLibrary unutar kojeg je potrebno definirati klasu REST koja ima metodu Search(). 
@@ -43,27 +45,21 @@ namespace YouTube_kv
         public List<YouTubeVideo> GetVideos()
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = " ";
+            string url = "";
             string sJson = CallRestMethod(url);
             JObject oJson = JObject.Parse(sJson);
-            //čitanje vrijednosti iz Json-a
-            foreach (JObject item in oJson.SelectToken("regionCode"))
+            var oVideos = oJson["items"].ToList();//doći do snippet čvora 
+            for(int i=0;i<oVideos.Count();i++)
             {
-                string Video_title = (string)item.SelectToken("title");
-                string Region_code = (string)item.SelectToken("regionCode");
-                string Video_id = (string)item.SelectToken("videoID");
-                string Channel_title = (string)item.SelectToken("channelTitle");
-                //dodavanje objekata u listu
                 lYTVideos.Add(new YouTubeVideo
                 {
-                    sVideoTitle = Video_title,
-                    sRegionCode = Region_code,
-                    sVideoID = Video_id,
-                    sChannelTitle = Channel_title,
+                    sVideoID = (string)oVideos[i]["videoID"],
+                    sVideoTitle = (string)oVideos[i]["title"],
+                    sDescription = (string)oVideos[i]["description"],
+                    sChannelTitle = (string)oVideos[i]["channelTitle"],
                 });
             }
-            return lYTVideos;
-            
+            return lYTVideos;     
         }
     }
 }
