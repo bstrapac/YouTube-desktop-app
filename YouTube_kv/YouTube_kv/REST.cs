@@ -45,19 +45,20 @@ namespace YouTube_kv
         public List<YouTubeVideo> GetVideos()
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = "";
+            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=kali&regionCode=HR&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
             string sJson = CallRestMethod(url);
             JObject oJson = JObject.Parse(sJson);
-            var oVideos = oJson["items"].ToList();//doći do snippet čvora 
-            for(int i=0;i<oVideos.Count();i++)
+            var oVideos = oJson["items"].ToList();
+            for (int i = 0; i < oVideos.Count(); i++)
             {
+                var sSnippet = oVideos[i]["snippet"];                
                 lYTVideos.Add(new YouTubeVideo
-                {
-                    sVideoID = (string)oVideos[i]["videoID"],
-                    sVideoTitle = (string)oVideos[i]["title"],
-                    sDescription = (string)oVideos[i]["description"],
-                    sChannelTitle = (string)oVideos[i]["channelTitle"],
+                { 
+                    sVideoTitle = (string)sSnippet["title"],
+                    sDescription = (string)sSnippet["description"],
+                    sChannelTitle = (string)sSnippet["channelTitle"],
                 });
+
             }
             return lYTVideos;     
         }
