@@ -42,18 +42,20 @@ namespace YouTube_kv
             webresponse.Close();
             return result;
         }
-        public List<YouTubeVideo> GetVideos()
+        public List<YouTubeVideo> GetVideos(string sPretrazi)
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=kali&regionCode=HR&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
+            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
+            url += sPretrazi;
+            url+= "&regionCode=HR&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
             string sJson = CallRestMethod(url);
             JObject oJson = JObject.Parse(sJson);
             var oVideos = oJson["items"].ToList();
             for (int i = 0; i < oVideos.Count(); i++)
             {
-                var sSnippet = oVideos[i]["snippet"];                
+                var sSnippet = oVideos[i]["snippet"];
                 lYTVideos.Add(new YouTubeVideo
-                { 
+                {
                     sVideoTitle = (string)sSnippet["title"],
                     sDescription = (string)sSnippet["description"],
                     sChannelTitle = (string)sSnippet["channelTitle"],

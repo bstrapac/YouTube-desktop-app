@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTapi", "YouTube_kv\RESTa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testYT", "testYT\testYT.csproj", "{96084105-EC02-4B2B-92C5-255C75F71696}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsYouToubeApp", "WindowsFormsYouToubeApp\WindowsFormsYouToubeApp.csproj", "{A755C1A5-35EE-4356-BD53-12010F54FAE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{96084105-EC02-4B2B-92C5-255C75F71696}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96084105-EC02-4B2B-92C5-255C75F71696}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96084105-EC02-4B2B-92C5-255C75F71696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A755C1A5-35EE-4356-BD53-12010F54FAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A755C1A5-35EE-4356-BD53-12010F54FAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A755C1A5-35EE-4356-BD53-12010F54FAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A755C1A5-35EE-4356-BD53-12010F54FAE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
