@@ -17,10 +17,6 @@ using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
-
-/*3.Kreirati projekt RESTapi tipa ClassLibrary unutar kojeg je potrebno definirati klasu REST koja ima metodu Search(). 
-  Metoda pozivom rest api-ja vraća i parsira JSON u listu objekata klase YouTubeVideo.
-  4.Kreirati klasu prema JSON strukturi odgovora */
 namespace YouTube_kv
 {
     public class REST
@@ -30,7 +26,7 @@ namespace YouTube_kv
         {
             HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
             webrequest.Method = "GET";
-            webrequest.ContentType = "application/x-www-form-urlencoded";//Additional information: Specified value has invalid Control characters.
+            webrequest.ContentType = "application/x-www-form-urlencoded";
             //webrequest.Headers.Add("Username", "xyz");
             //webrequest.Headers.Add("Password", "abc");
             HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
@@ -54,8 +50,10 @@ namespace YouTube_kv
             for (int i = 0; i < oVideos.Count(); i++)
             {
                 var sSnippet = oVideos[i]["snippet"];
+                var sID = oVideos[i]["id"];
                 lYTVideos.Add(new YouTubeVideo
                 {
+                    sVideoID=(string)sID["videoId"],
                     sVideoTitle = (string)sSnippet["title"],
                     sDescription = (string)sSnippet["description"],
                     sChannelTitle = (string)sSnippet["channelTitle"],

@@ -11,6 +11,7 @@ namespace YouTube_kv
         public string sVideoTitle { get; set; } 
         public string sDescription { get; set; }
         public string sChannelTitle{ get; set; } 
+        public string  sVideoID { get; set; }
 
     }
 }

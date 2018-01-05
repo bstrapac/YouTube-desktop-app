@@ -16,12 +16,16 @@ namespace WindowsFormsYouToubeApp
         public Form1()
         {
             InitializeComponent();
+            CRUD rVideo = new CRUD();
+            DataGridViewImageColumn oSaveButton = new DataGridViewImageColumn();
+            oSaveButton.Image = Image.FromFile("D:/YouTube_KV/save.png");
+            oSaveButton.Width = 40;
+            oSaveButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridYT.Columns.Add(oSaveButton);
+            dataGridYT.AutoGenerateColumns = false;
 
-            DataGridViewImageColumn oEditButton = new DataGridViewImageColumn();
-            oEditButton.Image = Image.FromFile("D:/YouTube_KV/save.png");
-            oEditButton.Width = 40;
-            oEditButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridYT.Columns.Add(oEditButton);
+            List<YouTubeVideo> list1 = rVideo.GetVideosDB();
+            dgMojiVidei.DataSource = list1;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -29,6 +33,21 @@ namespace WindowsFormsYouToubeApp
             REST Video = new REST();
             List<YouTubeVideo> list = Video.GetVideos(inptPretraziYT.Text);
             dataGridYT.DataSource = list;
+        }
+        private void SaveVideo_btn(object sender, DataGridViewCellEventArgs e)
+        {
+            CRUD SaveVideoYT = new CRUD();
+            YouTubeVideo Video = new YouTubeVideo();
+            dataGridYT.Rows[e.RowIndex].Selected = true;
+            if (dataGridYT.CurrentCell.ColumnIndex.Equals(4) && e.RowIndex != -1)
+            {
+                Video.sVideoTitle = dataGridYT.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Video.sVideoID = dataGridYT.Rows[e.RowIndex].Cells[1].Value.ToString();
+                Video.sChannelTitle = dataGridYT.Rows[e.RowIndex].Cells[2].ToString();
+                Video.sDescription= dataGridYT.Rows[e.RowIndex].Cells[3].ToString();
+                SaveVideoYT.SaveVideo(Video);
+            }
+
         }
     }
 }
