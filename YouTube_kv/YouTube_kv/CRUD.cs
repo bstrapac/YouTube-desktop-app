@@ -26,8 +26,9 @@ namespace YouTube_kv
                     {
                         lVideos.Add(new YouTubeVideo()
                         {
+                            nVideoID = (int)oReader["Video_Id"],
                             sVideoTitle = (string)oReader["Video_Naziv"],
-                            sVideoID = (string)oReader["Video_Link"],
+                            sVideoLink = (string)oReader["Video_Link"],
                             sChannelTitle = (string)oReader["Video_Channel"],
                             sDescription = (string)oReader["Video_Description"],
                         });
@@ -43,7 +44,23 @@ namespace YouTube_kv
             using (DbCommand oCommand = oConnection.CreateCommand())
             //using- pozivanjem ove naredbe iskorištena memorija nakon korištenja se oslobađa
             {
-                oCommand.CommandText = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description) VALUES ('" + oVideo.sVideoTitle + "', '" + oVideo.sVideoID + "', ' " + oVideo.sChannelTitle + "', '" + oVideo.sDescription+"');";
+                oCommand.CommandText = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description) VALUES ('" + oVideo.sVideoTitle +"', '"+ oVideo.sVideoLink +"', ' "+ oVideo.sChannelTitle +"', '"+ oVideo.sDescription+"');";
+                //kombinacija stringa sa varijablama kako bi smo popunili sql naredbe za promjene u bazi podataka (za string '' u sql)
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+                    //nema povratne vrijednosti
+                }
+            }
+        }
+        public void DeleteVideo(YouTubeVideo oVideo)
+        {
+            string sSqlConnectionString = ConfigurationManager.AppSettings["SqlConnectionString"];
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            //using- pozivanjem ove naredbe iskorištena memorija nakon korištenja se oslobađa
+            {
+                oCommand.CommandText = "DELETE FROM YouTube_videos WHERE Video_Link = '" + oVideo.sVideoLink + "'";
                 //kombinacija stringa sa varijablama kako bi smo popunili sql naredbe za promjene u bazi podataka (za string '' u sql)
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())

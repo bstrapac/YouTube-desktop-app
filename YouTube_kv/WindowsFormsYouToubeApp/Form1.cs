@@ -18,7 +18,7 @@ namespace WindowsFormsYouToubeApp
             InitializeComponent();
             CRUD rVideo = new CRUD();
             DataGridViewImageColumn oSaveButton = new DataGridViewImageColumn();
-            oSaveButton.Image = Image.FromFile("D:/YouTube_KV/save.png");
+            oSaveButton.Image = Image.FromFile("D:/YouTube_KV/check.png");
             oSaveButton.Width = 40;
             oSaveButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridYT.Columns.Add(oSaveButton);
@@ -26,6 +26,12 @@ namespace WindowsFormsYouToubeApp
 
             List<YouTubeVideo> list1 = rVideo.GetVideosDB();
             dgMojiVidei.DataSource = list1;
+            DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
+            oDeleteButton.Image = Image.FromFile("D:/YouTube_KV/basket.png");
+            oDeleteButton.Width = 40;
+            oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgMojiVidei.Columns.Add(oDeleteButton);
+            dgMojiVidei.AutoGenerateColumns = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -36,18 +42,23 @@ namespace WindowsFormsYouToubeApp
         }
         private void SaveVideo_btn(object sender, DataGridViewCellEventArgs e)
         {
-            CRUD SaveVideoYT = new CRUD();
-            YouTubeVideo Video = new YouTubeVideo();
-            dataGridYT.Rows[e.RowIndex].Selected = true;
+            CRUD SaveVideoYT = new CRUD();            
+            dataGridYT.Rows[e.RowIndex].Selected = true;           
             if (dataGridYT.CurrentCell.ColumnIndex.Equals(4) && e.RowIndex != -1)
             {
-                Video.sVideoTitle = dataGridYT.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Video.sVideoID = dataGridYT.Rows[e.RowIndex].Cells[1].Value.ToString();
-                Video.sChannelTitle = dataGridYT.Rows[e.RowIndex].Cells[2].ToString();
-                Video.sDescription= dataGridYT.Rows[e.RowIndex].Cells[3].ToString();
-                SaveVideoYT.SaveVideo(Video);
-            }
-
+                string Title = dataGridYT.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string Link = dataGridYT.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string ChannelTitle = dataGridYT.Rows[e.RowIndex].Cells[2].ToString();
+                string Description= dataGridYT.Rows[e.RowIndex].Cells[3].ToString();
+                YouTubeVideo oVideo = new YouTubeVideo()
+                {
+                    sVideoTitle= Title,
+                    sVideoLink= Link,
+                    sChannelTitle=ChannelTitle,
+                    sDescription=Description,
+                };
+                SaveVideoYT.SaveVideo(oVideo);              
+              }
         }
     }
 }

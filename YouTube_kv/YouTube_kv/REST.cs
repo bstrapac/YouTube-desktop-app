@@ -53,7 +53,7 @@ namespace YouTube_kv
                 var sID = oVideos[i]["id"];
                 lYTVideos.Add(new YouTubeVideo
                 {
-                    sVideoID=(string)sID["videoId"],
+                    sVideoLink=(string)sID["videoId"],
                     sVideoTitle = (string)sSnippet["title"],
                     sDescription = (string)sSnippet["description"],
                     sChannelTitle = (string)sSnippet["channelTitle"],
