@@ -29,10 +29,15 @@ namespace WindowsFormsYouToubeApp
             List<YouTubeVideo> list1 = rVideo.GetVideosDB();
             dgMojiVidei.DataSource = list1;
             DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
+            DataGridViewImageColumn oPlayButton = new DataGridViewImageColumn();
             oDeleteButton.Image = Image.FromFile("D:/YouTube_KV/basket.png");
+            oPlayButton.Image = Image.FromFile("D:/YouTube_KV/play.png");
             oDeleteButton.Width = 40;
+            oSaveButton.Width = 40;
             oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            oPlayButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgMojiVidei.Columns.Add(oDeleteButton);
+            dgMojiVidei.Columns.Add(oPlayButton);
             dgMojiVidei.AutoGenerateColumns = false;
         }
 
@@ -74,9 +79,9 @@ namespace WindowsFormsYouToubeApp
             {
                 string ID = dgMojiVidei.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string Naziv = dgMojiVidei.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string Link = dgMojiVidei.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string Opis = dgMojiVidei.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string Kanal = dgMojiVidei.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string Kanal = dgMojiVidei.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string Link = dgMojiVidei.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string Opis= dgMojiVidei.Rows[e.RowIndex].Cells[4].Value.ToString();
                 YouTubeVideo oVideo = new YouTubeVideo()
                 {
                     nVideoID = Int32.Parse(ID),
@@ -88,8 +93,20 @@ namespace WindowsFormsYouToubeApp
                 DeleteVideoYT.DeleteVideo(oVideo);
                 CRUD cVidei = new CRUD();
                 dgMojiVidei.DataSource = cVidei.GetVideosDB();
+            }           
+            if (dgMojiVidei.CurrentCell.ColumnIndex.Equals(6) && e.RowIndex != -1)
+            {
+                string sLink = dgMojiVidei.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string address = "https://www.youtube.com/watch?v=";
+                address+=sLink;
+                address.Trim();
+                Debug.WriteLine(address);
+                playVideo.Navigate(address);
             }
-
+           
+            
         }
+
+       
     }
 }

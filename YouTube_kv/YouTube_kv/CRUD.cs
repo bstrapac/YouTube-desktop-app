@@ -43,9 +43,8 @@ namespace YouTube_kv
             string sSqlConnectionString = ConfigurationManager.AppSettings["SqlConnectionString"];
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
-
             {
-                string sQuery = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description) VALUES ('" + oVideo.sVideoTitle + "', '" + oVideo.sVideoLink + "', ' " + oVideo.sChannelTitle + "', '" + oVideo.sDescription + "');";
+                string sQuery = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description) VALUES ('" + oVideo.sVideoTitle + "', '" + oVideo.sVideoLink + "', '" + oVideo.sChannelTitle + "', '" + oVideo.sDescription + "');";
                 oCommand.CommandText = sQuery;
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
