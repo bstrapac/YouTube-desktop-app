@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YouTube_kv;
+using System.Diagnostics;
 
 namespace WindowsFormsYouToubeApp
 {
@@ -15,8 +16,7 @@ namespace WindowsFormsYouToubeApp
     {
         public Form1()
         {
-            InitializeComponent();
-            CRUD rVideo = new CRUD();
+            InitializeComponent();           
             DataGridViewImageColumn oSaveButton = new DataGridViewImageColumn();
             oSaveButton.Image = Image.FromFile("D:/YouTube_KV/check.png");
             oSaveButton.Width = 40;
@@ -24,6 +24,8 @@ namespace WindowsFormsYouToubeApp
             dataGridYT.Columns.Add(oSaveButton);
             dataGridYT.AutoGenerateColumns = false;
 
+
+            CRUD rVideo = new CRUD();
             List<YouTubeVideo> list1 = rVideo.GetVideosDB();
             dgMojiVidei.DataSource = list1;
             DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
@@ -40,25 +42,54 @@ namespace WindowsFormsYouToubeApp
             List<YouTubeVideo> list = Video.GetVideos(inptPretraziYT.Text);
             dataGridYT.DataSource = list;
         }
-        private void SaveVideo_btn(object sender, DataGridViewCellEventArgs e)
+
+        private void dataGridYT_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            CRUD SaveVideoYT = new CRUD();            
-            dataGridYT.Rows[e.RowIndex].Selected = true;           
+            CRUD SaveVideoYT = new CRUD();
+            dataGridYT.Rows[e.RowIndex].Selected = true;
             if (dataGridYT.CurrentCell.ColumnIndex.Equals(4) && e.RowIndex != -1)
             {
                 string Title = dataGridYT.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string Link = dataGridYT.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string ChannelTitle = dataGridYT.Rows[e.RowIndex].Cells[2].ToString();
-                string Description= dataGridYT.Rows[e.RowIndex].Cells[3].ToString();
+                string ChannelTitle = dataGridYT.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string Description = dataGridYT.Rows[e.RowIndex].Cells[3].Value.ToString();
                 YouTubeVideo oVideo = new YouTubeVideo()
                 {
-                    sVideoTitle= Title,
-                    sVideoLink= Link,
-                    sChannelTitle=ChannelTitle,
-                    sDescription=Description,
+                    sVideoTitle = Title,
+                    sVideoLink = Link,
+                    sChannelTitle = ChannelTitle,
+                    sDescription = Description,
                 };
-                SaveVideoYT.SaveVideo(oVideo);              
-              }
+                SaveVideoYT.SaveVideo(oVideo);
+            }
+            CRUD Videi = new CRUD();
+            dgMojiVidei.DataSource = Videi.GetVideosDB();
+        }
+
+        private void dgMojiVidei_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CRUD DeleteVideoYT = new CRUD();
+            dgMojiVidei.Rows[e.RowIndex].Selected = true;
+            if (dgMojiVidei.CurrentCell.ColumnIndex.Equals(5) && e.RowIndex != -1)
+            {
+                string ID = dgMojiVidei.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string Naziv = dgMojiVidei.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string Link = dgMojiVidei.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string Opis = dgMojiVidei.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string Kanal = dgMojiVidei.Rows[e.RowIndex].Cells[4].Value.ToString();
+                YouTubeVideo oVideo = new YouTubeVideo()
+                {
+                    nVideoID = Int32.Parse(ID),
+                    sVideoTitle = Naziv,
+                    sVideoLink = Link,
+                    sChannelTitle = Kanal,
+                    sDescription = Opis,
+                };
+                DeleteVideoYT.DeleteVideo(oVideo);
+                CRUD cVidei = new CRUD();
+                dgMojiVidei.DataSource = cVidei.GetVideosDB();
+            }
+
         }
     }
 }
