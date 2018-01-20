@@ -42,14 +42,14 @@
             this.Slika = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MojiVideoZapisi = new System.Windows.Forms.TabPage();
             this.dgMojiVidei = new System.Windows.Forms.DataGridView();
-            this.LinkVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OpisVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KanalVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VideoNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.playVideo = new System.Windows.Forms.WebBrowser();
             this.TabControlYT = new System.Windows.Forms.TabControl();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VideoNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KanalVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OpisVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LinkVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PretragaVidea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridYT)).BeginInit();
             this.MojiVideoZapisi.SuspendLayout();
@@ -194,50 +194,6 @@
             this.dgMojiVidei.TabIndex = 0;
             this.dgMojiVidei.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgMojiVidei_CellContentClick);
             // 
-            // LinkVidea
-            // 
-            this.LinkVidea.DataPropertyName = "sVideoLink";
-            this.LinkVidea.HeaderText = "Link";
-            this.LinkVidea.Name = "LinkVidea";
-            // 
-            // OpisVidea
-            // 
-            this.OpisVidea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OpisVidea.DataPropertyName = "sDescription";
-            this.OpisVidea.FillWeight = 200F;
-            this.OpisVidea.HeaderText = "Opis Videa";
-            this.OpisVidea.MinimumWidth = 100;
-            this.OpisVidea.Name = "OpisVidea";
-            // 
-            // KanalVidea
-            // 
-            this.KanalVidea.DataPropertyName = "sChannelTitle";
-            this.KanalVidea.HeaderText = "Kanal";
-            this.KanalVidea.Name = "KanalVidea";
-            this.KanalVidea.Width = 120;
-            // 
-            // VideoNaziv
-            // 
-            this.VideoNaziv.DataPropertyName = "sVideoTitle";
-            this.VideoNaziv.HeaderText = "Naziv";
-            this.VideoNaziv.Name = "VideoNaziv";
-            this.VideoNaziv.Width = 300;
-            // 
-            // Thumbnail
-            // 
-            this.Thumbnail.DataPropertyName = "sVideoImage";
-            this.Thumbnail.HeaderText = "Thumbnail";
-            this.Thumbnail.Name = "Thumbnail";
-            this.Thumbnail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "nVideoID";
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 35;
-            this.ID.Name = "ID";
-            this.ID.Width = 50;
-            // 
             // playVideo
             // 
             this.playVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -263,6 +219,50 @@
             this.TabControlYT.SelectedIndex = 0;
             this.TabControlYT.Size = new System.Drawing.Size(1023, 524);
             this.TabControlYT.TabIndex = 0;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "nVideoID";
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 35;
+            this.ID.Name = "ID";
+            this.ID.Width = 50;
+            // 
+            // Thumbnail
+            // 
+            this.Thumbnail.DataPropertyName = "sVideoImage";
+            this.Thumbnail.HeaderText = "Thumbnail";
+            this.Thumbnail.Name = "Thumbnail";
+            this.Thumbnail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // VideoNaziv
+            // 
+            this.VideoNaziv.DataPropertyName = "sVideoTitle";
+            this.VideoNaziv.HeaderText = "Naziv";
+            this.VideoNaziv.Name = "VideoNaziv";
+            this.VideoNaziv.Width = 300;
+            // 
+            // KanalVidea
+            // 
+            this.KanalVidea.DataPropertyName = "sChannelTitle";
+            this.KanalVidea.HeaderText = "Kanal";
+            this.KanalVidea.Name = "KanalVidea";
+            this.KanalVidea.Width = 120;
+            // 
+            // OpisVidea
+            // 
+            this.OpisVidea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OpisVidea.DataPropertyName = "sDescription";
+            this.OpisVidea.FillWeight = 200F;
+            this.OpisVidea.HeaderText = "Opis Videa";
+            this.OpisVidea.MinimumWidth = 100;
+            this.OpisVidea.Name = "OpisVidea";
+            // 
+            // LinkVidea
+            // 
+            this.LinkVidea.DataPropertyName = "sVideoLink";
+            this.LinkVidea.HeaderText = "Link";
+            this.LinkVidea.Name = "LinkVidea";
             // 
             // Form1
             // 
@@ -300,13 +300,13 @@
         private System.Windows.Forms.TabPage MojiVideoZapisi;
         private System.Windows.Forms.WebBrowser playVideo;
         private System.Windows.Forms.DataGridView dgMojiVidei;
+        private System.Windows.Forms.TabControl TabControlYT;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Thumbnail;
         private System.Windows.Forms.DataGridViewTextBoxColumn VideoNaziv;
         private System.Windows.Forms.DataGridViewTextBoxColumn KanalVidea;
         private System.Windows.Forms.DataGridViewTextBoxColumn OpisVidea;
         private System.Windows.Forms.DataGridViewTextBoxColumn LinkVidea;
-        private System.Windows.Forms.TabControl TabControlYT;
     }
 }
 

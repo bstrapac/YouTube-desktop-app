@@ -20,6 +20,7 @@ namespace WindowsFormsYouToubeApp
         public Form1()
         {
             InitializeComponent();
+            //DataGridView pretraženih videa
             DataGridViewImageColumn oSaveButton = new DataGridViewImageColumn();
             oSaveButton.Image = Image.FromFile("D:/YouTube_KV/save.png");
             oSaveButton.Width = 50;
@@ -30,7 +31,7 @@ namespace WindowsFormsYouToubeApp
             dataGridYT.Rows.Add(Environment.NewLine);
             dataGridYT.RowTemplate.MinimumHeight = 30;
 
-
+            //DataGridView videa iz baze podataka
             CRUD rVideo = new CRUD();
             List<YouTubeVideo> list1 = rVideo.GetVideosDB();
             dgMojiVidei.DataSource = list1;
@@ -55,30 +56,33 @@ namespace WindowsFormsYouToubeApp
             List<YouTubeVideo> list = Video.GetVideos(inptPretraziYT.Text);
             List<YouTubeVideo> Spremljeni = SpremljeniYT.GetVideosDB();
             dataGridYT.DataSource = list;
-
-            dataGridYT.Show();
-        }
-        private void dataGridYT_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-                // assume your DataGridViewImageColumn name is Column1, you can change this as your column name
-                if (dataGridYT.Columns[e.ColumnIndex].Name == "Slika")
+            for (int j = 0; j < Spremljeni.Count(); j++)
             {
-                e.Value = GetImageFromUrl("http://png.findicons.com/files/icons/1609/ose_png/256/tick.png");
-               
+                string comparison = Spremljeni[j].sVideoLink;
+                foreach (DataGridViewRow dgRow in dataGridYT.Rows)
+                {
+                    var cell = dgRow.Cells[3];
+                    if (cell.Value.ToString() == comparison)
+                    {
+                        dgRow.DefaultCellStyle.BackColor = Color.Red;
+                        dgRow.Cells[5].Value = Image.FromFile("D:/YouTube_KV/check.png");
+                    }
+                }
+                dataGridYT.DataSource = list;                
+                dataGridYT.Show();
             }
-                if(dataGridYT.Columns[e.ColumnIndex].Name == "videoID")
+        }
+        private void dgMojiVidei_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {                
+            if (dgMojiVidei.Columns[e.ColumnIndex].Name == "Thumbnail")
             {
-                 dataGridYT.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = Color.Azure;
+                e.Value = GetImageFromUrl("https://i.ytimg.com/vi/6lBadPs5iK0/default.jpg");               
             }
         }
 
-        // below method will download the image from given url
         public static Image GetImageFromUrl(string url)
         {
             HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-            // if you have proxy server, you may need to set proxy details like below 
-            //httpWebRequest.Proxy = new WebProxy("proxyserver",port){ Credentials = new NetworkCredential(){ UserName ="uname", Password = "pw"}};
-
             using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
             {
                 using (Stream stream = httpWebReponse.GetResponseStream())
@@ -102,39 +106,21 @@ namespace WindowsFormsYouToubeApp
                 string Link = dataGridYT.Rows[e.RowIndex].Cells[3].Value.ToString();
                 string Opis = dataGridYT.Rows[e.RowIndex].Cells[4].Value.ToString();
                 string Description = Opis.Replace("'", "");
-                foreach (DataGridViewRow row in dataGridYT.Rows)
+                string Naslov = Title.Replace("'", "");
+                string Kanal = ChannelTitle.Replace("'", "");
+                YouTubeVideo oVideo = new YouTubeVideo()
                 {
-                    for (int i = 0; i < Spremljeni.Count(); i++)
-                    {
-                        if (Link != Spremljeni[i].sVideoLink)
-                        {
-                            YouTubeVideo oVideo = new YouTubeVideo()
-                            {
-                                sVideoTitle = Title,
-                                sVideoLink = Link,
-                                sChannelTitle = ChannelTitle,
-                                sDescription = Description,
-                                sVideoImage = Thumbnail,
-                            };
-                            SaveVideoYT.SaveVideo(oVideo);
-                            Debug.WriteLine(Link);
-                            MessageBox.Show("Uspješno ste spremili video!");
-                            Spremljeni = Videi.GetVideosDB();
-                            break;
-                        }
-                        else
-                        {
-                            Spremljeni = Videi.GetVideosDB();
-                            row.DefaultCellStyle.BackColor = Color.Aquamarine;
-                            MessageBox.Show("Video već postoji");
-                            break;
-                        }
-                    }
-                }
-                dataGridYT.ClearSelection();
+                    sVideoTitle = Naslov,
+                    sVideoLink = Link,
+                    sChannelTitle = Kanal,
+                    sDescription = Description,
+                    sVideoImage = Thumbnail,
+                };
+                SaveVideoYT.SaveVideo(oVideo);
+                MessageBox.Show("Uspješno ste spremili video!");
+
+                dgMojiVidei.DataSource = Videi.GetVideosDB();
             }
-        kraj:            
-            dgMojiVidei.DataSource = Videi.GetVideosDB();
         }
 
     private void dgMojiVidei_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -172,32 +158,5 @@ namespace WindowsFormsYouToubeApp
                 playVideo.Show();
             }
         }
-
-        /*private void dgMojiVidei_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            // assume your DataGridViewImageColumn name is Column1, you can change this as your column name
-            if (dgMojiVidei.Columns[e.ColumnIndex].Name == "Thumbnail")
-            {
-                string Img = dgMojiVidei.Rows[e.RowIndex].Cells[4].Value.ToString();
-                string imgUrl = "https://i.ytimg.com/vi/";
-                imgUrl += Img ;
-                imgUrl += "/default.jpg";
-                e.Value = GetImageFromUrl(imgUrl);
-            }
-        }
-
-        // below method will download the image from given url
-        public static Image GetImageFromUrl(string url)
-        {
-            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-
-            using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
-            {
-                using (Stream stream = httpWebReponse.GetResponseStream())
-                {
-                    return Image.FromStream(stream);
-                }
-            }
-        }*/
     }
 }
