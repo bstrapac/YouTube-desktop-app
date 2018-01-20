@@ -32,6 +32,7 @@ namespace YouTube_kv
                             sVideoLink = (string)oReader["Video_Link"],
                             sChannelTitle = (string)oReader["Video_Channel"],
                             sDescription = (string)oReader["Video_Description"],
+                            sVideoImage = (string)oReader["Video_Image"],
                         });
                     }
                 }
@@ -44,7 +45,7 @@ namespace YouTube_kv
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
-                string sQuery = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description) VALUES ('" + oVideo.sVideoTitle + "', '" + oVideo.sVideoLink + "', '" + oVideo.sChannelTitle + "', '" + oVideo.sDescription + "');";
+                string sQuery = "INSERT INTO YouTube_videos (Video_Naziv, Video_Link, Video_Channel, Video_Description, Video_Image) VALUES ('" + oVideo.sVideoTitle + "', '" + oVideo.sVideoLink + "', '" + oVideo.sChannelTitle + "', '" + oVideo.sDescription + "', '"+ oVideo.sVideoImage + "');";
                 oCommand.CommandText = sQuery;
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
@@ -59,8 +60,7 @@ namespace YouTube_kv
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
-                oCommand.CommandText = "DELETE FROM YouTube_videos WHERE Video_Id = '" + oVideo.nVideoID + "';";
-           
+                oCommand.CommandText = "DELETE FROM YouTube_videos WHERE Video_Id = '" + oVideo.nVideoID + "';";           
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
                 {

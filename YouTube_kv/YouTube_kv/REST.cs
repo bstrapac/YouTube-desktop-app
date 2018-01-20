@@ -27,12 +27,9 @@ namespace YouTube_kv
             HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
             webrequest.Method = "GET";
             webrequest.ContentType = "application/x-www-form-urlencoded";
-            //webrequest.Headers.Add("Username", "xyz");
-            //webrequest.Headers.Add("Password", "abc");
             HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
             Encoding enc = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader responseStream = new StreamReader(webresponse.GetResponseStream(),
-            enc);
+            StreamReader responseStream = new StreamReader(webresponse.GetResponseStream(),enc);
             string result = string.Empty;
             result = responseStream.ReadToEnd();
             webresponse.Close();
@@ -41,9 +38,9 @@ namespace YouTube_kv
         public List<YouTubeVideo> GetVideos(string sPretrazi)
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
+            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&q=";
             url += sPretrazi;
-            url+= "&regionCode=HR&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
+            url+= "&regionCode=HR&type=video&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
             string sJson = CallRestMethod(url);
             JObject oJson = JObject.Parse(sJson);
             var oVideos = oJson["items"].ToList();
@@ -51,15 +48,15 @@ namespace YouTube_kv
             {
                 var sSnippet = oVideos[i]["snippet"];
                 var sID = oVideos[i]["id"];
-                lYTVideos.Add(new YouTubeVideo
-                {
-                    sVideoLink=(string)sID["videoId"],
-                    sVideoTitle = (string)sSnippet["title"],
-                    sDescription = (string)sSnippet["description"],
-                    sChannelTitle = (string)sSnippet["channelTitle"],
-                });
-
-            }
+                        lYTVideos.Add(new YouTubeVideo
+                        {
+                            sVideoLink = (string)sID["videoId"],
+                            sVideoTitle = (string)sSnippet["title"],
+                            sDescription = (string)sSnippet["description"],
+                            sChannelTitle = (string)sSnippet["channelTitle"],
+                            sVideoImage = (string)sSnippet["thumbnails"]["default"]["url"],                            
+                        });
+            }            
             return lYTVideos;     
         }
     }

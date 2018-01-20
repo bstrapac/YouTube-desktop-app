@@ -13,6 +13,7 @@ namespace YouTube_kv
         public string sDescription { get; set; }
         public string sChannelTitle{ get; set; } 
         public string  sVideoLink { get; set; }
+        public string sVideoImage { get; set; }
 
     }
 }
