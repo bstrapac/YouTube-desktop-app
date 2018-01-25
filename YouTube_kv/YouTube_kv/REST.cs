@@ -16,6 +16,7 @@ using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace YouTube_kv
 {
@@ -38,7 +39,7 @@ namespace YouTube_kv
         public List<YouTubeVideo> GetVideos(string sPretrazi)
         {
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
-            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&q=";
+            string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=";
             url += sPretrazi;
             url+= "&regionCode=HR&type=video&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
             string sJson = CallRestMethod(url);
@@ -59,5 +60,6 @@ namespace YouTube_kv
             }            
             return lYTVideos;     
         }
+        
     }
 }

@@ -68,5 +68,8 @@ namespace YouTube_kv
                 }
             }
         }
+        //DBCC CHECKIDENT ('YouTube_videos', RESEED, 0);
+        //GO
+        //reseed counter
     }
 }

@@ -31,25 +31,27 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.PretragaVidea = new System.Windows.Forms.TabPage();
-            this.inptPretraziYT = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.dataGridYT = new System.Windows.Forms.DataGridView();
-            this.Opis = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.videoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NaslovKanala = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NaslovVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Slika = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.inptPretraziYT = new System.Windows.Forms.TextBox();
             this.MojiVideoZapisi = new System.Windows.Forms.TabPage();
-            this.dgMojiVidei = new System.Windows.Forms.DataGridView();
             this.playVideo = new System.Windows.Forms.WebBrowser();
+            this.dgMojiVidei = new System.Windows.Forms.DataGridView();
             this.TabControlYT = new System.Windows.Forms.TabControl();
+            this.GetImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VideoNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KanalVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OpisVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LinkVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GetImageSearch = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ThumbnailLink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NaslovVidea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NaslovKanala = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.videoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Opis = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PretragaVidea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridYT)).BeginInit();
             this.MojiVideoZapisi.SuspendLayout();
@@ -60,7 +62,7 @@
             // PretragaVidea
             // 
             this.PretragaVidea.BackgroundImage = global::WindowsFormsYouToubeApp.Properties.Resources.ytbackground;
-            this.PretragaVidea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PretragaVidea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PretragaVidea.Controls.Add(this.dataGridYT);
             this.PretragaVidea.Controls.Add(this.btnSearch);
             this.PretragaVidea.Controls.Add(this.label1);
@@ -73,36 +75,6 @@
             this.PretragaVidea.Text = "Pretraga Video zapisa";
             this.PretragaVidea.UseVisualStyleBackColor = true;
             // 
-            // inptPretraziYT
-            // 
-            this.inptPretraziYT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.inptPretraziYT.Location = new System.Drawing.Point(148, 23);
-            this.inptPretraziYT.Name = "inptPretraziYT";
-            this.inptPretraziYT.Size = new System.Drawing.Size(731, 20);
-            this.inptPretraziYT.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(6, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Unesite pojam za pretragu: ";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(885, 23);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(116, 20);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.Text = "Pretraži ";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // dataGridYT
             // 
             this.dataGridYT.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -111,7 +83,8 @@
             this.dataGridYT.BackgroundColor = System.Drawing.Color.Firebrick;
             this.dataGridYT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridYT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Slika,
+            this.GetImageSearch,
+            this.ThumbnailLink,
             this.NaslovVidea,
             this.NaslovKanala,
             this.videoID,
@@ -124,47 +97,40 @@
             this.dataGridYT.Visible = false;
             this.dataGridYT.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridYT_CellContentClick);
             // 
-            // Opis
+            // btnSearch
             // 
-            this.Opis.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Opis.DataPropertyName = "sDescription";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Opis.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Opis.FillWeight = 200F;
-            this.Opis.HeaderText = "Opis Videa";
-            this.Opis.Name = "Opis";
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(885, 23);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(116, 20);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Pretraži ";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // videoID
+            // label1
             // 
-            this.videoID.DataPropertyName = "sVideoLink";
-            this.videoID.HeaderText = "Link Videa";
-            this.videoID.Name = "videoID";
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Unesite pojam za pretragu: ";
             // 
-            // NaslovKanala
+            // inptPretraziYT
             // 
-            this.NaslovKanala.DataPropertyName = "sChannelTitle";
-            this.NaslovKanala.HeaderText = "Kanal";
-            this.NaslovKanala.Name = "NaslovKanala";
-            this.NaslovKanala.Width = 110;
-            // 
-            // NaslovVidea
-            // 
-            this.NaslovVidea.DataPropertyName = "sVideoTitle";
-            this.NaslovVidea.HeaderText = "Naslov";
-            this.NaslovVidea.Name = "NaslovVidea";
-            this.NaslovVidea.Width = 250;
-            // 
-            // Slika
-            // 
-            this.Slika.DataPropertyName = "sVideoImage";
-            this.Slika.HeaderText = "Thumbnail";
-            this.Slika.Name = "Slika";
-            this.Slika.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.inptPretraziYT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.inptPretraziYT.Location = new System.Drawing.Point(148, 23);
+            this.inptPretraziYT.Name = "inptPretraziYT";
+            this.inptPretraziYT.Size = new System.Drawing.Size(731, 20);
+            this.inptPretraziYT.TabIndex = 0;
             // 
             // MojiVideoZapisi
             // 
             this.MojiVideoZapisi.BackgroundImage = global::WindowsFormsYouToubeApp.Properties.Resources.ytbackground;
-            this.MojiVideoZapisi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MojiVideoZapisi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MojiVideoZapisi.Controls.Add(this.playVideo);
             this.MojiVideoZapisi.Controls.Add(this.dgMojiVidei);
             this.MojiVideoZapisi.Location = new System.Drawing.Point(4, 22);
@@ -175,6 +141,19 @@
             this.MojiVideoZapisi.Text = "Moji Video zapisi";
             this.MojiVideoZapisi.UseVisualStyleBackColor = true;
             // 
+            // playVideo
+            // 
+            this.playVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.playVideo.Location = new System.Drawing.Point(3, 205);
+            this.playVideo.MinimumSize = new System.Drawing.Size(20, 20);
+            this.playVideo.Name = "playVideo";
+            this.playVideo.Size = new System.Drawing.Size(1006, 287);
+            this.playVideo.TabIndex = 1;
+            this.playVideo.Url = new System.Uri("", System.UriKind.Relative);
+            this.playVideo.Visible = false;
+            // 
             // dgMojiVidei
             // 
             this.dgMojiVidei.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -182,6 +161,7 @@
             this.dgMojiVidei.BackgroundColor = System.Drawing.Color.Firebrick;
             this.dgMojiVidei.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgMojiVidei.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GetImage,
             this.ID,
             this.Thumbnail,
             this.VideoNaziv,
@@ -190,22 +170,9 @@
             this.LinkVidea});
             this.dgMojiVidei.Location = new System.Drawing.Point(3, 0);
             this.dgMojiVidei.Name = "dgMojiVidei";
-            this.dgMojiVidei.Size = new System.Drawing.Size(998, 125);
+            this.dgMojiVidei.Size = new System.Drawing.Size(998, 211);
             this.dgMojiVidei.TabIndex = 0;
             this.dgMojiVidei.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgMojiVidei_CellContentClick);
-            // 
-            // playVideo
-            // 
-            this.playVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.playVideo.Location = new System.Drawing.Point(3, 131);
-            this.playVideo.MinimumSize = new System.Drawing.Size(20, 20);
-            this.playVideo.Name = "playVideo";
-            this.playVideo.Size = new System.Drawing.Size(1006, 361);
-            this.playVideo.TabIndex = 1;
-            this.playVideo.Url = new System.Uri("", System.UriKind.Relative);
-            this.playVideo.Visible = false;
             // 
             // TabControlYT
             // 
@@ -220,13 +187,18 @@
             this.TabControlYT.Size = new System.Drawing.Size(1023, 524);
             this.TabControlYT.TabIndex = 0;
             // 
+            // GetImage
+            // 
+            this.GetImage.HeaderText = "Image";
+            this.GetImage.Name = "GetImage";
+            // 
             // ID
             // 
             this.ID.DataPropertyName = "nVideoID";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 35;
             this.ID.Name = "ID";
-            this.ID.Width = 50;
+            this.ID.Width = 35;
             // 
             // Thumbnail
             // 
@@ -234,20 +206,21 @@
             this.Thumbnail.HeaderText = "Thumbnail";
             this.Thumbnail.Name = "Thumbnail";
             this.Thumbnail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Thumbnail.Width = 81;
             // 
             // VideoNaziv
             // 
             this.VideoNaziv.DataPropertyName = "sVideoTitle";
             this.VideoNaziv.HeaderText = "Naziv";
             this.VideoNaziv.Name = "VideoNaziv";
-            this.VideoNaziv.Width = 300;
+            this.VideoNaziv.Width = 170;
             // 
             // KanalVidea
             // 
             this.KanalVidea.DataPropertyName = "sChannelTitle";
             this.KanalVidea.HeaderText = "Kanal";
             this.KanalVidea.Name = "KanalVidea";
-            this.KanalVidea.Width = 120;
+            this.KanalVidea.Width = 70;
             // 
             // OpisVidea
             // 
@@ -263,6 +236,48 @@
             this.LinkVidea.DataPropertyName = "sVideoLink";
             this.LinkVidea.HeaderText = "Link";
             this.LinkVidea.Name = "LinkVidea";
+            // 
+            // GetImageSearch
+            // 
+            this.GetImageSearch.HeaderText = "Image";
+            this.GetImageSearch.Name = "GetImageSearch";
+            // 
+            // ThumbnailLink
+            // 
+            this.ThumbnailLink.DataPropertyName = "sVideoImage";
+            this.ThumbnailLink.HeaderText = "Thumbnail";
+            this.ThumbnailLink.Name = "ThumbnailLink";
+            this.ThumbnailLink.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // NaslovVidea
+            // 
+            this.NaslovVidea.DataPropertyName = "sVideoTitle";
+            this.NaslovVidea.HeaderText = "Naslov";
+            this.NaslovVidea.Name = "NaslovVidea";
+            this.NaslovVidea.Width = 250;
+            // 
+            // NaslovKanala
+            // 
+            this.NaslovKanala.DataPropertyName = "sChannelTitle";
+            this.NaslovKanala.HeaderText = "Kanal";
+            this.NaslovKanala.Name = "NaslovKanala";
+            this.NaslovKanala.Width = 110;
+            // 
+            // videoID
+            // 
+            this.videoID.DataPropertyName = "sVideoLink";
+            this.videoID.HeaderText = "Link Videa";
+            this.videoID.Name = "videoID";
+            // 
+            // Opis
+            // 
+            this.Opis.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Opis.DataPropertyName = "sDescription";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Opis.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Opis.FillWeight = 200F;
+            this.Opis.HeaderText = "Opis Videa";
+            this.Opis.Name = "Opis";
             // 
             // Form1
             // 
@@ -289,11 +304,6 @@
 
         private System.Windows.Forms.TabPage PretragaVidea;
         private System.Windows.Forms.DataGridView dataGridYT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Slika;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NaslovVidea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NaslovKanala;
-        private System.Windows.Forms.DataGridViewTextBoxColumn videoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Opis;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox inptPretraziYT;
@@ -301,12 +311,19 @@
         private System.Windows.Forms.WebBrowser playVideo;
         private System.Windows.Forms.DataGridView dgMojiVidei;
         private System.Windows.Forms.TabControl TabControlYT;
+        private System.Windows.Forms.DataGridViewImageColumn GetImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Thumbnail;
         private System.Windows.Forms.DataGridViewTextBoxColumn VideoNaziv;
         private System.Windows.Forms.DataGridViewTextBoxColumn KanalVidea;
         private System.Windows.Forms.DataGridViewTextBoxColumn OpisVidea;
         private System.Windows.Forms.DataGridViewTextBoxColumn LinkVidea;
+        private System.Windows.Forms.DataGridViewImageColumn GetImageSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ThumbnailLink;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NaslovVidea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NaslovKanala;
+        private System.Windows.Forms.DataGridViewTextBoxColumn videoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Opis;
     }
 }
 
