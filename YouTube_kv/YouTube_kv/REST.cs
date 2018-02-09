@@ -41,7 +41,7 @@ namespace YouTube_kv
             List<YouTubeVideo> lYTVideos = new List<YouTubeVideo>();
             string url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=";
             url += sPretrazi;
-            url+= "&regionCode=HR&type=video&key=AIzaSyBRyYqGTzNh1xUlisww1zfif2ag3Wx9yms";
+            url+= "&regionCode=HR&type=video&key=";
             string sJson = CallRestMethod(url);
             JObject oJson = JObject.Parse(sJson);
             var oVideos = oJson["items"].ToList();
